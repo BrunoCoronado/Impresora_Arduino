@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Dibujo"
+    android:background="@color/colorPrimaryLight">
+
+    <TextView
+        android:id="@+id/txtNombreDibujo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/primaryText"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <usac.trext.impresora_arduino.PaintView
+
+        android:id="@+id/paintView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/txtColor"
+        app:layout_constraintTop_toBottomOf="@id/txtNombreDibujo"
+
+        app:layout_constraintWidth_percent = ".90"
+        app:layout_constraintHeight_percent = ".70"
+    />
+
+    <Spinner
+        android:id="@+id/spnColor"
+
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintStart_toStartOf="@id/btnReiniciar"
+        app:layout_constraintBottom_toTopOf="@id/btnReiniciar"
+        app:layout_constraintTop_toBottomOf="@id/paintView"
+        app:layout_constraintWidth_percent = ".48"
+    />
+
+    <TextView
+        android:id="@+id/txtColor"
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:text="@string/txt_color"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/secondaryText"
+
+        app:layout_constraintBottom_toTopOf="@id/btnImprimir"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/paintView" />
+
+    <Button
+        android:id="@+id/btnImprimir"
+        style="@style/Widget.AppCompat.Button"
+        android:background="@color/colorAccent"
+
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:textColor="@color/primaryText"
+
+        android:text="@string/txt_imprimir"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/spnColor"
+        app:layout_constraintWidth_percent=".48" />
+
+    <Button
+        android:id = "@+id/btnReiniciar"
+        android:text = "@string/txt_reiniciar"
+        android:background="@color/colorAccent"
+
+        android:layout_width = "0dp"
+        android:layout_height = "wrap_content"
+        android:layout_margin = "4dp"
+        android:textColor="@color/primaryText"
+
+        app:layout_constraintEnd_toEndOf = "parent"
+        app:layout_constraintBottom_toBottomOf = "parent"
+        app:layout_constraintTop_toBottomOf="@id/spnColor"
+        app:layout_constraintWidth_percent = ".48"
+    />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

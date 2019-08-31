@@ -2,9 +2,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="usac.trext.impresora_arduino.MainActivity">
+
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/action_nuevo"
         android:orderInCategory="100"
-        android:title="@string/action_settings"
+        android:title="@string/action_nuevo_dibujo"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_galeria"
+        android:orderInCategory="100"
+        android:title="@string/action_galeria"
         app:showAsAction="never" />
 </menu>

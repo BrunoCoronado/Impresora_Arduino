@@ -1,4 +1,13 @@
 <resources>
-    <string name="app_name">Impresora_Arduino</string>
-    <string name="action_settings">Settings</string>
+    <string name="app_name">Impresora Arduino</string>
+    <string name="action_nuevo_dibujo">Nuevo Dibujo</string>
+    <string name="action_galeria">Galeria</string>
+    <string name="txt_color">Color</string>
+    <string name="txt_imprimir">Imprimir</string>
+    <string name="txt_reiniciar">Reiniciar</string>
+    <string-array name="colores">
+        <item>Rojo</item>
+        <item>Negro</item>
+        <item>Azul</item>
+    </string-array>
 </resources>
