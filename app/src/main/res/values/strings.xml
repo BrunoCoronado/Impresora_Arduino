@@ -5,9 +5,5 @@
     <string name="txt_color">Color</string>
     <string name="txt_imprimir">Imprimir</string>
     <string name="txt_reiniciar">Reiniciar</string>
-    <string-array name="colores">
-        <item>Rojo</item>
-        <item>Negro</item>
-        <item>Azul</item>
-    </string-array>
+    <string name="txt_eliminar">Eliminar</string>
 </resources>

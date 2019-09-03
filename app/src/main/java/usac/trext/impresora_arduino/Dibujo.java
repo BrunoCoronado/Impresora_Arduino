@@ -94,7 +94,7 @@ public class Dibujo extends Fragment {
         protected Void doInBackground(String... strings) {
             if(!paintView.imprimir(strings[0]))
                 Toast.makeText(getContext(),"Error generar imagen.",Toast.LENGTH_SHORT).show();
-            //cambiar activity
+            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new Galeria()).commit();
             return null;
         }
 

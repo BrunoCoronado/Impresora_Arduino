@@ -1,7 +1,10 @@
 package usac.trext.impresora_arduino;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -19,6 +22,7 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 
     private FloatingActionButton fab;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
                 nuevoDibujo();
             }
         });
+        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new Galeria()).commit();
     }
 
     @Override
@@ -48,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
             nuevoDibujo();
             return true;
         }else if(id == R.id.action_galeria){
+            getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new Galeria()).commit();
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -61,12 +67,15 @@ public class MainActivity extends AppCompatActivity {
         builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                fab.hide();
-                Bundle bundle = new Bundle();
-                bundle.putString("nombre", txtNombre.getText().toString());
-                Dibujo dibujo = new Dibujo();
-                dibujo.setArguments(bundle);
-                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, dibujo).commit();
+                if(!txtNombre.getText().toString().equals("")){
+                    fab.hide();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("nombre", txtNombre.getText().toString());
+                    Dibujo dibujo = new Dibujo();
+                    dibujo.setArguments(bundle);
+                    getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, dibujo).commit();
+                }else
+                    Toast.makeText(getApplicationContext(),"No se definio un nombre.",Toast.LENGTH_SHORT).show();
             }
         });
         builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
