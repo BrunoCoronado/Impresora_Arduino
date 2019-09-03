@@ -1,5 +1,6 @@
 package usac.trext.impresora_arduino;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -121,22 +122,27 @@ public class PaintView extends View {
         currentColor = color;
     }
 
-    public void imprimir(String name){
-        /*String file_path = context.getFilesDir().getAbsolutePath() +
-                "/PhysicsSketchpad";
-        File dir = new File(file_path);
-        if(!dir.exists())
-            dir.mkdirs();
-        System.out.println(file_path);
-        File file = new File(dir, name + ".png");
-        FileOutputStream fOut = null;
+    @SuppressLint("WrongThread")
+    public Boolean imprimir(String name){
         try {
-            fOut = new FileOutputStream(file);
-            mBitmap.compress(Bitmap.CompressFormat.PNG, 85, fOut);
-            fOut.flush();
-            fOut.close();
+            if(crearCarpeta()){
+                FileOutputStream fileOutputStream = new FileOutputStream("/storage/emulated/0/ImpresoraArduino/" + name + ".png");
+                mBitmap.compress(Bitmap.CompressFormat.PNG, 90, fileOutputStream);
+                fileOutputStream.flush();
+                fileOutputStream.close();
+                return  true;
+            }
+            return false;
         } catch (Exception e) {
             e.printStackTrace();
-        }*/
+        }
+        return false;
+    }
+
+    private boolean crearCarpeta(){
+        File folder = new File("/storage/emulated/0/ImpresoraArduino");
+        if (!folder.exists())
+            return folder.mkdirs();
+        return true;
     }
 }
