@@ -1,6 +1,7 @@
 package usac.trext.impresora_arduino;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
@@ -19,9 +20,11 @@ import java.util.ArrayList;
 public class GaleriaAdapter extends RecyclerView.Adapter<GaleriaAdapter.GaleriaViewHolder> {
 
     private ArrayList<String> data;
+    private Context context;
 
-    public GaleriaAdapter(ArrayList<String> data) {
+    public GaleriaAdapter(ArrayList<String> data, Context context) {
         this.data = data;
+        this.context = context;
     }
 
     @NonNull
@@ -32,24 +35,31 @@ public class GaleriaAdapter extends RecyclerView.Adapter<GaleriaAdapter.GaleriaV
 
     @Override
     public void onBindViewHolder(@NonNull GaleriaViewHolder holder, final int position) {
-        holder.imageView.setImageBitmap(Bitmap.createScaledBitmap(BitmapFactory.decodeFile("/storage/emulated/0/ImpresoraArduino/" + data.get(position)), 800,800, false));
-        holder.txtImagen.setText(data.get(position).replace(".png",""));
-        holder.btnEliminar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                File file = new File("/storage/emulated/0/ImpresoraArduino/" + data.get(position));
-                file.delete();
-                data.remove(position);
-                notifyItemRemoved(position);
-                notifyItemRangeChanged(position, data.size());
-            }
-        });
-        holder.btnImprimir.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        try{
+            holder.imageView.setImageBitmap(Bitmap.createScaledBitmap(BitmapFactory.decodeFile("/storage/emulated/0/ImpresoraArduino/" + data.get(position)), 800,800, false));
+            holder.txtImagen.setText(data.get(position).replace(".png",""));
+            holder.btnEliminar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    File file = new File("/storage/emulated/0/ImpresoraArduino/" + data.get(position));
+                    file.delete();
+                    file = new File("/storage/emulated/0/ImpresoraArduino/" + data.get(position).replace(".png", "gc.txt"));
+                    file.delete();
+                    data.remove(position);
+                    notifyItemRemoved(position);
+                    notifyItemRangeChanged(position, data.size());
+                }
+            });
+            holder.btnImprimir.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Services services =  new Services(context);
+                    services.enviarContenido(data.get(position).replace(".png", "gc.txt"));
+                }
+            });
+        }catch (Exception ex){
 
-            }
-        });
+        }
     }
 
     @Override

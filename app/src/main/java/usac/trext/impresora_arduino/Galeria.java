@@ -20,9 +20,6 @@ import java.util.ArrayList;
 
 public class Galeria extends Fragment {
 
-
-
-
     public Galeria() {}
 
 
@@ -36,7 +33,7 @@ public class Galeria extends Fragment {
                 File[] files = directory.listFiles();
                 if(files != null){
                     for (int i = 0; i < files.length; i++)
-                        data.add(files[i].getName());
+                        if(files[i].getName().contains(".png")) data.add(files[i].getName());
                 }
             }else{
                 ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
@@ -49,7 +46,7 @@ public class Galeria extends Fragment {
         }
         RecyclerView recyclerView = view.findViewById(R.id.imagenes_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
-        recyclerView.setAdapter(new GaleriaAdapter(data));
+        recyclerView.setAdapter(new GaleriaAdapter(data, this.getContext()));
         return view;
     }
 }
